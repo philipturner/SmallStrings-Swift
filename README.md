@@ -1,6 +1,8 @@
 # SmallStrings
 ## Reducing localized .strings file sizes by 80%
 
+The exact same as the original repo, but in a _better_ language. This brings zero performance cost and is a perfectly safe substitute for the Objective-C version.
+
 ### How it works
 
 The library consists of a build-time minification step, and an iOS library:
