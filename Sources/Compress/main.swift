@@ -1,3 +1,6 @@
+import Foundation
+import Compression
+
 guard CommandLine.argc == 3 else {
     exit(1)
 }

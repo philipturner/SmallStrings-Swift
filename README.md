@@ -11,6 +11,18 @@ The library consists of a build-time minification step, and an iOS library:
 
 ### Usage
 
+#### Swift Package Manager
+
+Add a package by selecting `File` → `Add Packages…` in Xcode’s menu bar and using this repo's URL:
+```
+https://github.com/EmergeTools/SmallStrings
+```
+
+Then add a Run Script build phase after the "Copy bundle resources" phase:
+```
+cd ${BUILD_DIR%/Build/*}/SourcePackages/checkouts/SmallStrings && ./localize.sh ${CODESIGNING_FOLDER_PATH} ${DERIVED_FILES_DIR}/SmallStrings.cache
+```
+
 #### Cocoapods
 
 Add this to your Podfile:
@@ -27,4 +39,4 @@ Lastly, replace all usages of `NSLocalizedString(key, comment)` with `SSTStringF
 
 #### Manual
 
-Add `Source/SSTSmallStrings.{h,m}` to your project. Create a `compress` binary via `clang -O3 compress.m -framework Foundation -lcompression -o compress` and put the executable in the same directory as `localize.{rb,sh}`. Add a build step with `cd /path/to/SmallStrings && ./localize.sh ${CODESIGNING_FOLDER_PATH} ${DERIVED_FILES_DIR}/SmallStrings.cache`. Lastly, replace all usages of `NSLocalizedString(key, comment)` with `SSTStringForKey(key)`.
+Add `Sources/SSTSmallStrings.swift` to your project. Create a `compress` binary via `swift build --configuration release` and copy the executable from `.build/release` to the same directory as `localize.{rb,sh}`. Add a build step with `cd /path/to/SmallStrings && ./localize.sh ${CODESIGNING_FOLDER_PATH} ${DERIVED_FILES_DIR}/SmallStrings.cache`. Lastly, replace all usages of `NSLocalizedString(key, comment)` with `SSTStringForKey(key)`.
