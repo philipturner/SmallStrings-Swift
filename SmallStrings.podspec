@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'SmallStrings'
-  s.version          = '0.1.3'
+  s.version          = '0.1.4'
   s.summary          = 'A minifier for localized .strings files'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.authors          = 'Emerge Tools'
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '11.0'
 
   s.source_files = [
-    'Source/*.{m,h}',
+    'Sources/SmallStrings/*.swift',
   ]
 
   s.preserve_paths = [
@@ -21,8 +21,7 @@ Pod::Spec.new do |s|
 
   # Ensure the run script and upload-symbols are callable via
   s.prepare_command = <<-PREPARE_COMMAND_END
-    clang -O3 compress.m -framework Foundation -lcompression -o compress
+    swift build --configuration release
+    cp .build/release/compress .
   PREPARE_COMMAND_END
-
-  s.libraries = 'compression'
 end
